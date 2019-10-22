@@ -12,15 +12,15 @@ import SwiftUI
  It automatically updates its `query` biding while the user writes the text, without waiting for the `Search` button to be pressed.
 */
 @available(iOS 13.0, *)
-struct UIKitSearchBar: UIViewRepresentable {
+public struct UIKitSearchBar: UIViewRepresentable {
 
     // MARK: - Properties
 
     /// Binding that represents the textfield's current query.
-    @Binding var query: String
+    @Binding public var query: String
 
     /// Binding that represents if the `searchBar` is currently focused or not.
-    @Binding var isEditing: Bool
+    @Binding public var isEditing: Bool
 
     /// The textfield's placeholder text.
     private let placeholderText: String
@@ -31,7 +31,7 @@ struct UIKitSearchBar: UIViewRepresentable {
     /// - Parameter placeholderText: The textfield's placeholder text.
     /// - Parameter query: Binding that represents the textfield's current query.
     /// - Parameter isEditing: Binding that represents if the `searchBar` is currently focused or not.
-    init(
+    public init(
         placeholderText: String = "",
         query: Binding<String>,
         isEditing: Binding<Bool>
@@ -43,7 +43,7 @@ struct UIKitSearchBar: UIViewRepresentable {
 
     // MARK: - UIViewRepresentable implementation
 
-    func makeUIView(
+    public func makeUIView(
         context: UIViewRepresentableContext<UIKitSearchBar>
     ) -> UISearchBar {
         let bar = UISearchBar()
@@ -54,7 +54,7 @@ struct UIKitSearchBar: UIViewRepresentable {
         return bar
     }
 
-    func updateUIView(
+    public func updateUIView(
         _ searchBar: UISearchBar,
         context: UIViewRepresentableContext<UIKitSearchBar>
     ) {
@@ -67,39 +67,39 @@ struct UIKitSearchBar: UIViewRepresentable {
         }
     }
 
-    func makeCoordinator() -> UIKitSearchBar.Coordinator {
+    public func makeCoordinator() -> UIKitSearchBar.Coordinator {
         return Coordinator(self)
     }
 
-    class Coordinator: NSObject, UISearchBarDelegate {
+    public class Coordinator: NSObject, UISearchBarDelegate {
 
         private let view: UIKitSearchBar
 
-        init(_ view: UIKitSearchBar) {
+        public init(_ view: UIKitSearchBar) {
             self.view = view
         }
 
         // MARK: - UISearchBarDelegate
 
-        func searchBarCancelButtonClicked(
+        public func searchBarCancelButtonClicked(
             _ searchBar: UISearchBar
         ) {
             self.view.query = ""
         }
 
-        func searchBarTextDidBeginEditing(
+        public func searchBarTextDidBeginEditing(
             _ searchBar: UISearchBar
         ) {
             self.view.isEditing = true
         }
 
-        func searchBarTextDidEndEditing(
+        public func searchBarTextDidEndEditing(
             _ searchBar: UISearchBar
         ) {
             self.view.isEditing = false
         }
 
-        func searchBar(
+        public func searchBar(
             _ searchBar: UISearchBar,
             textDidChange searchText: String
         ) {
