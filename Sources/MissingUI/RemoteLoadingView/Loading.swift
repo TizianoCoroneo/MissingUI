@@ -40,38 +40,38 @@ import Foundation
  }
  ```
  */
-public enum Loading<Data, Failure: Error> {
+public enum Loading<Success, Failure: Error> {
     case loading
-    case success(Data)
+    case success(Success)
     case failure(Failure)
 }
 
 // MARK: - Computed properties
 
 extension Loading {
-    /// Whether this value is in the `.loading` state.
+    /// `true` if this value is in the `.loading` state.
     public var isLoading: Bool {
         guard case .loading = self
             else { return false }
         return true
     }
 
-    /// Whether this value is in the `.success` state.
+    /// `true` if this value is in the `.success` state.
     public var isSuccess: Bool {
         guard case .success = self
             else { return false }
         return true
     }
 
-    /// Whether this value is in the `.failure` state.
+    /// `true` if this value is in the `.failure` state.
     public var isFailure: Bool {
         guard case .failure = self
             else { return false }
         return true
     }
 
-    /// Returns the `Data` value contained in the `.success` case, or `nil` otherwise.
-    public var data: Data? {
+    /// Returns the `Success` value contained in the `.success` case, or `nil` otherwise.
+    public var value: Success? {
         guard case let .success(value) = self
             else { return nil }
         return value

@@ -37,6 +37,7 @@ import Foundation
  */
 extension Result {
 
+    /// `true` if this value is in the `.success` state.
     var isSuccess: Bool {
         switch self {
         case .success: return true
@@ -44,6 +45,7 @@ extension Result {
         }
     }
 
+    /// `true` if  this value is in the `.failure` state.
     var isFailure: Bool {
         switch self {
         case .success: return false
@@ -51,6 +53,7 @@ extension Result {
         }
     }
 
+    /// Returns the `Success` value contained in the `.success` case, or `nil` otherwise.
     var value: Success? {
         switch self {
         case .success(let value): return value
@@ -58,6 +61,7 @@ extension Result {
         }
     }
 
+    /// Returns the `Failure` value contained in the `.failure` case, or `nil` otherwise.
     var error: Failure? {
         switch self {
         case .failure(let error): return error

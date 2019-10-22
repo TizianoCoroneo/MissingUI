@@ -1,5 +1,5 @@
 //
-//  RemoteDataView.swift
+//  RemoteLoadingView.swift
 //  Runes
 //
 //  Created by Tiziano Coroneo on 20/10/2019.
@@ -56,7 +56,7 @@ public struct RemoteLoadingView<
     public var body: some View {
         Group {
             if loadingData.isSuccess {
-                successView(loadingData.data!)
+                successView(loadingData.value!)
             } else if loadingData.isFailure {
                 failureView(loadingData.error!)
             } else {

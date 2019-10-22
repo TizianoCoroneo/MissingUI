@@ -48,10 +48,10 @@ public struct ResultView<SuccessView: View, FailureView: View, Success, Failure:
         }
     }
 
-    private var unsafeSuccessData: Success {
-        guard case .success(let data) = result
+    private var unsafeSuccessValue: Success {
+        guard case .success(let value) = result
             else { fatalError("Should not ever get here") }
-        return data
+        return value
     }
 
     private var unsafeErrorData: Failure {
@@ -65,7 +65,7 @@ public struct ResultView<SuccessView: View, FailureView: View, Success, Failure:
     public var body: some View {
         Group {
             if isSuccess {
-                successView(unsafeSuccessData)
+                successView(unsafeSuccessValue)
             } else {
                 failureView(unsafeErrorData)
             }
