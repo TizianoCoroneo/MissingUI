@@ -9,19 +9,47 @@
 import SwiftUI
 import Combine
 
+/**
+ Utility used to load an `Image`from a `URL`.
+
+ You can specify a placeholder `UIImage`, which `URLSession` to use, which `URLRequest.CachePolicy` to use, and if it should trigger a breakpoint on failure (for debugging purposes).
+
+ You can also specify these values on the `static` properties, to change the default values applied when they are not specified in the `init`.
+
+ All the errors are:
+ - or from `URLSession.dataTask`
+ - or `ImageLoaderError`
+ */
 @available(iOS 13.0, *)
 public class ImageLoader: ObservableObject {
+
+    // MARK: - Static properties (Defaults)
+
+    /// The `URLSession` to use in case another one is not specified in the `init`.
     public static var defaultSession: URLSession = .shared
-    
+
+    /// The `URLRequest.CachePolicy` to use in case another one is not specified in the `init`.
     public static var defaultCachePolicy: URLRequest.CachePolicy = .returnCacheDataElseLoad
 
+    /// The `shouldBreakpointOnError` value to use in case another one is not specified in the `init`.
+    /// If `true`, it adds a `.breakpointOnError` to the Combine chain used to request the image data.
     public static var defaultShouldBreakpointOnError: Bool = false
 
+    // MARK: - Instance properties
+
+    /// `Published` property that contains the retrieved UIImage data, and makes it available to SwiftUI's `View`s.
     @Published public var image: UIImage
 
+    /// The `URLSession` used to make the HTTP request to the specified `URL`.
     private let session: URLSession
+
+    /// If `true`, it adds a `.breakpointOnError` to the Combine chain used to request the image data.
     private let shouldBreakpointOnError: Bool
+
+    /// `AnyCancellable` that keeps in memory a reference to the Combine chain used to request the image data.
     private var cancellable: AnyCancellable?
+
+    // MARK: - Initializer
 
     public init(
         url: URL,
@@ -37,6 +65,7 @@ public class ImageLoader: ObservableObject {
             url: url,
             cachePolicy: cachePolicy)
 
+        // If we have a cached response, do not use the placeholder at all.
         if let cachedResponse = session
             .configuration
             .urlCache?
@@ -50,7 +79,7 @@ public class ImageLoader: ObservableObject {
 
         self.cancellable = session
             .dataTaskPublisher(for: request)
-            .tryMap { data, response in
+            .tryMap({ data, response in
                 guard
                     let httpResponse = response as? HTTPURLResponse
                     else {
@@ -69,15 +98,15 @@ public class ImageLoader: ObservableObject {
                 }
 
                 return image
-        }
-        .breakpoint(receiveCompletion: {
-            switch $0 {
-            case .finished: return false
-            case .failure: return self.shouldBreakpointOnError
-            }
-        })
-        .replaceError(with: placeholder ?? UIImage())
-        .receive(on: DispatchQueue.main)
-        .assign(to: \.image, on: self)
+            })
+            .breakpoint(receiveCompletion: {
+                switch $0 {
+                case .finished: return false
+                case .failure: return self.shouldBreakpointOnError
+                }
+            })
+            .replaceError(with: placeholder ?? UIImage())
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: self)
     }
 }

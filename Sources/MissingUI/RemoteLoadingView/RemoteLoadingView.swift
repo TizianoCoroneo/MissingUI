@@ -8,6 +8,13 @@
 
 import SwiftUI
 
+/**
+ This utility `View` takes a `Loading` value, and displays a `SuccessView` if that value is a `.success` (passing the data inside the `@ViewBuilder successView` closure), displays a `FailureView` if the value is a `.failure` (passing the corresponding `Error` inside the closure), and displays a `LoadingView` otherwise (in case of the `.loading` state).
+
+ It is a workaround for the current state of `@ViewBuilder`, which does not allow any flow control statements except the barebone `if condition`.
+
+ - See also: `ResultView`
+*/
 @available(iOS 13.0, *)
 public struct RemoteLoadingView<
     Success,
@@ -35,8 +42,8 @@ public struct RemoteLoadingView<
     public init(
         _ loadingData: Loading<Success, Failure>,
         @ViewBuilder successView: @escaping (Success) -> SuccessView,
-                     @ViewBuilder loadingView: @escaping () -> LoadingView,
-                                  @ViewBuilder failureView: @escaping (Failure) -> FailureView
+        @ViewBuilder loadingView: @escaping () -> LoadingView,
+        @ViewBuilder failureView: @escaping (Failure) -> FailureView
     ) {
         self.loadingData = loadingData
         self.successView = successView

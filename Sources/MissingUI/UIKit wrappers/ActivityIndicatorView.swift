@@ -8,6 +8,10 @@
 
 import SwiftUI
 
+/**
+ SwiftUI `View` embedding a UIKit `UIActivityIndicatorView`.
+ You can optionally provide a `UIActivityIndicatorView.Style`: the main `init()` defaults to `.large`.
+ */
 @available(iOS 13.0, *)
 public struct ActivityIndicatorView: UIViewRepresentable {
 

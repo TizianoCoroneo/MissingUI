@@ -8,6 +8,11 @@
 
 import SwiftUI
 
+
+/**
+ SwiftUI `View` embedding a UIKit `UIBlurEffect`.
+ You have to choose a specific `UIBlurEffect.Style`.
+ */
 @available(iOS 13.0, *)
 public struct BlurEffectView: UIViewRepresentable {
 

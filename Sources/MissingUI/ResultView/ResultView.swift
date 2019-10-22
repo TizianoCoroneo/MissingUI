@@ -8,8 +8,11 @@
 
 import SwiftUI
 
-/// This utility `View` takes a `Result` value, and displays a `SuccessView` if that value is a `.success` (passing the data inside), and displays a `FailureView` otherwise, passing the corresponding `Error`.
-/// It is a workaround for the current state of `@ViewBuilder`, which does not allow any flow control statements except the barebone `if condition`.
+/**
+This utility `View` takes a `Result` value, and displays a `SuccessView` if that value is a `.success` (passing the data inside the `@ViewBuilder successView` closure), and displays a `FailureView` otherwise, passing the corresponding `Error` inside the closure.
+
+It is a workaround for the current state of `@ViewBuilder`, which does not allow any flow control statements except the barebone `if condition`.
+*/
 @available(iOS 13.0, *)
 public struct ResultView<SuccessView: View, FailureView: View, Success, Failure: Error>: View {
 
@@ -29,7 +32,7 @@ public struct ResultView<SuccessView: View, FailureView: View, Success, Failure:
     public init(
         _ result: Result<Success, Failure>,
         @ViewBuilder successView: @escaping (Success) -> SuccessView,
-                     @ViewBuilder failureView: @escaping (Failure) -> FailureView
+        @ViewBuilder failureView: @escaping (Failure) -> FailureView
     ) {
         self.result = result
         self.successView = successView

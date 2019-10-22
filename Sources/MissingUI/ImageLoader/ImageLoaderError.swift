@@ -8,10 +8,19 @@
 
 import Foundation
 
+/// All the errors that can be thrown from `ImageLoader`
 enum ImageLoaderError: LocalizedError {
+
+    /// Received an invalid HTTP code. Print it to get a localized description of it.
     case invalidHTTPCode(Int, Data)
+
+    /// Received (somehow) a response that is not a `HTTPURLResponse` code.
     case notHTTPResponse(URLResponse, Data)
+
+    /// The data retrieved from the URL is not convertible to a `UIImage`.
     case notAnImage(URLResponse, Data)
+
+    // MARK: - Error descriptions
 
     var errorDescription: String? {
         switch self {
