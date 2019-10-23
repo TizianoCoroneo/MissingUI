@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-
 /**
  SwiftUI `View` embedding a UIKit `UIBlurEffect`.
  You have to choose a specific `UIBlurEffect.Style`.
