@@ -58,11 +58,14 @@ public struct UIKitSearchBar: UIViewRepresentable {
         _ searchBar: UISearchBar,
         context: UIViewRepresentableContext<UIKitSearchBar>
     ) {
-        searchBar.text = query
+        if query != searchBar.text {
+            searchBar.text = query
+        }
 
-        if isEditing {
+        // The double condition is a trick to avoid `Modifying state during view update, this will cause undefined behavior.` runtime warning.
+        if isEditing, !searchBar.isFirstResponder {
             searchBar.becomeFirstResponder()
-        } else {
+        } else if !isEditing, searchBar.isFirstResponder {
             searchBar.resignFirstResponder()
         }
     }
@@ -75,8 +78,13 @@ public struct UIKitSearchBar: UIViewRepresentable {
 
         private let view: UIKitSearchBar
 
+        private let query: Binding<String>
+        private let isEditing: Binding<Bool>
+
         public init(_ view: UIKitSearchBar) {
             self.view = view
+            self.query = view._query
+            self.isEditing = view._isEditing
         }
 
         // MARK: - UISearchBarDelegate
@@ -84,19 +92,35 @@ public struct UIKitSearchBar: UIViewRepresentable {
         public func searchBarCancelButtonClicked(
             _ searchBar: UISearchBar
         ) {
-            self.view.query = ""
+            self.query.wrappedValue = ""
         }
 
         public func searchBarTextDidBeginEditing(
             _ searchBar: UISearchBar
         ) {
-            self.view.isEditing = true
+            self.isEditing.wrappedValue = true
         }
 
-        public func searchBarTextDidEndEditing(
+        public func searchBarShouldBeginEditing(
             _ searchBar: UISearchBar
-        ) {
-            self.view.isEditing = false
+        ) -> Bool {
+            // Updates the value of the `isEditing` state when the UIKit delegate is invoked.
+            // The double condition is a trick to avoid `Modifying state during view update, this will cause undefined behavior.` runtime warning.
+            if !searchBar.isFirstResponder, !self.isEditing.wrappedValue {
+                self.isEditing.wrappedValue = true
+            }
+            return true
+        }
+
+        public func searchBarShouldEndEditing(
+            _ searchBar: UISearchBar
+        ) -> Bool {
+            // Updates the value of the `isEditing` state when the UIKit delegate is invoked.
+            // The double condition is a trick to avoid `Modifying state during view update, this will cause undefined behavior.` runtime warning.
+            if searchBar.isFirstResponder, self.isEditing.wrappedValue {
+                self.isEditing.wrappedValue = false
+            }
+            return true
         }
 
         public func searchBar(
