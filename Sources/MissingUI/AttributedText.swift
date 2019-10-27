@@ -31,6 +31,11 @@ public struct AttributedText: UIViewRepresentable {
             self.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             label.setContentHuggingPriority(.defaultHigh, for: .vertical)
             label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+
+            self.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+            self.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+            label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+            label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         }
 
         required init?(coder: NSCoder) {
