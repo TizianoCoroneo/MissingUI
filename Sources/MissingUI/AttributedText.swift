@@ -35,6 +35,12 @@ public struct AttributedText: UIViewRepresentable {
 
     public let attributedString: NSAttributedString
 
+    public init(
+        attributedString: NSAttributedString
+    ) {
+        self.attributedString = attributedString
+    }
+
     public func makeUIView(
         context: Context
     ) -> LabelView {
