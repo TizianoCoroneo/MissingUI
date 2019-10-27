@@ -10,10 +10,10 @@ import SwiftUI
 
 public struct AttributedText: UIViewRepresentable {
 
-    class LabelView : UIView {
-        private var label = UILabel()
+    public class LabelView : UIView {
+        public let label = UILabel()
 
-        var attributedText: NSAttributedString? {
+        public internal(set) var attributedText: NSAttributedString? {
             get { label.attributedText }
             set { label.attributedText = newValue }
         }
