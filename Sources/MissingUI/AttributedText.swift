@@ -52,5 +52,6 @@ public struct AttributedText: UIViewRepresentable {
         context: UIViewRepresentableContext<AttributedText>
     ) {
         uiView.attributedText = attributedString
+        uiView.sizeToFit()
     }
 }
