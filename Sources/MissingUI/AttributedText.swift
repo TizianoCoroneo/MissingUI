@@ -17,6 +17,7 @@ public struct AttributedText: UIViewRepresentable {
             get { label.attributedText }
             set {
                 label.attributedText = newValue
+                label.sizeToFit()
             }
         }
 
