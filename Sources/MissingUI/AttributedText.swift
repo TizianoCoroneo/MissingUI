@@ -17,7 +17,6 @@ public struct AttributedText: UIViewRepresentable {
             get { label.attributedText }
             set {
                 label.attributedText = newValue
-                label.sizeToFit()
             }
         }
 
@@ -29,6 +28,11 @@ public struct AttributedText: UIViewRepresentable {
             label.numberOfLines = 0
             label.frame = self.bounds
             label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            self.setContentHuggingPriority(.defaultHigh, for: .vertical)
+            self.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+            label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+            label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         }
 
         required init?(coder: NSCoder) {
