@@ -12,7 +12,9 @@ import SwiftUI
 /// A View used to make selections from a list.
 /// It supports different kinds of selection; see `SelectionView.SelectionType`.
 @available(iOS 13.0, *)
-public struct SelectionView<Value: Hashable, Label: View>: View {
+public struct SelectionView<Value: Hashable, Options: RandomAccessCollection, Label: View>: View
+where Options.Element == Value
+{
 
     // MARK: - Selection type
 
@@ -46,7 +48,7 @@ public struct SelectionView<Value: Hashable, Label: View>: View {
     // MARK: - Properties
 
     /// The list of options that is possible to select.
-    public let options: [Value]
+    public let options: Options
 
     /// A `Binding` that mantains the `Set` of selected `Value`s.
     @Binding public var optionsSelection: Set<Value>
@@ -68,7 +70,7 @@ public struct SelectionView<Value: Hashable, Label: View>: View {
     /// - Parameter selectionBinding: A `Binding` that receives the `Set` of currently selected `Value`s.
     /// - Parameter label: The `View` that provides the appearance for the corresponding `SelectionRow` for the provided `Value`.
     public init(
-        content: [Value],
+        content: Options,
         selectionType: SelectionType,
         selectionBinding: Binding<Set<Value>>,
         @ViewBuilder label: @escaping (Value, _ isSelected: Binding<Bool>) -> Label
