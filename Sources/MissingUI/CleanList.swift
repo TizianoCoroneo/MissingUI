@@ -51,17 +51,9 @@ public struct CleanList<
         List(self.content, id: id, selection: $selection) {
             (data: DataCollection.Element) in
 
-            HStack(spacing: 0) {
-                NavigationLink(
-                    destination: self.destination(data),
-                    tag: data[keyPath: self.id],
-                    selection: self.$selection) {
-                        EmptyView()
-                }
-                .frame(width: 0, height: 0)
-
-                self.rowContent(data)
-            }
+            HiddenNavigationLink(
+                destination: self.destination(data),
+                label: { self.rowContent(data) })
         }
     }
 }
