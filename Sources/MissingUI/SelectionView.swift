@@ -11,7 +11,7 @@ import SwiftUI
 
 /// A View used to make selections from a list.
 /// It supports different kinds of selection; see `SelectionView.SelectionType`.
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 public struct SelectionView<Value: Hashable, Options: RandomAccessCollection, Label: View>: View
 where Options.Element == Value
 {

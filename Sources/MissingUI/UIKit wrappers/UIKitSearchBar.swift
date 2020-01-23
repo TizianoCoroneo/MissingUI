@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
 /**
  SwiftUI `View` embedding a UIKit `UISearchBar`.
  It automatically updates its `query` biding while the user writes the text, without waiting for the `Search` button to be pressed.
@@ -129,7 +130,9 @@ public struct UIKitSearchBar: UIViewRepresentable {
     }
 }
 
-#if DEBUG
+#endif
+
+#if DEBUG && canImport(UIKit)
 @available(iOS 13.0, *)
 struct UIKitSearchBar_Previews: PreviewProvider {
 

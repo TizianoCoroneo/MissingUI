@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 
+#if canImport(UIKit)
 /**
  Utility used to load an `Image`from a `URL`.
 
@@ -110,3 +111,5 @@ public class ImageLoader: ObservableObject {
             .assign(to: \.image, on: self)
     }
 }
+
+#endif

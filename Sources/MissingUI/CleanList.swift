@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// A `List` that does not display the "arrow" disclosure indicator when embedding a `NavigationLink`.
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 public struct CleanList<
     DataCollection: RandomAccessCollection,
     SelectionValue: Hashable,

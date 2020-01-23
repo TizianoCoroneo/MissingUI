@@ -13,7 +13,7 @@ This utility `View` takes a `Result` value, and displays a `SuccessView` if that
 
 It is a workaround for the current state of `@ViewBuilder`, which does not allow any flow control statements except the barebone `if condition`.
 */
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 public struct ResultView<SuccessView: View, FailureView: View, Success, Failure: Error>: View {
 
     // MARK: - Properties

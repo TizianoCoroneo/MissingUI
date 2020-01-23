@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
+
 /**
  SwiftUI `View` embedding a UIKit `UIActivityIndicatorView`.
  You can optionally provide a `UIActivityIndicatorView.Style`: the main `init()` defaults to `.large`.
@@ -35,3 +37,5 @@ public struct ActivityIndicatorView: UIViewRepresentable {
         _ uiView: UIActivityIndicatorView,
         context: UIViewRepresentableContext<ActivityIndicatorView>) {}
 }
+
+#endif

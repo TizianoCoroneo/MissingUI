@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+#if canImport(UIKit)
+
+@available(iOS 13.0, *)
 public struct RemoteImage<V: View>: View {
 
     @ObservedObject private var loader: ImageLoader
@@ -43,3 +46,5 @@ public struct RemoteImage<V: View>: View {
             Image(uiImage: self.loader.image))
     }
 }
+
+#endif

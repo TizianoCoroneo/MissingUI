@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 public extension Publisher {
     /**
      Converts a `Publisher<Output, Failure>` in a `Publisher<Result<Output, Failure>, Never>`.

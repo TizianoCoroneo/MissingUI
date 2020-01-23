@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 13.0, macOS 10.15, *)
 public struct SheetButton<Configured: View, Destination: View>: View {
 
     @State private var isPresented: Bool = false
@@ -37,6 +38,7 @@ public struct SheetButton<Configured: View, Destination: View>: View {
     }
 }
 
+@available(iOS 13.0, macOS 10.15, *)
 extension SheetButton where Configured == Button<Text> {
     public init(
         title: String,

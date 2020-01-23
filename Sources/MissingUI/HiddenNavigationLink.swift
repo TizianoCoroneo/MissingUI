@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 struct HiddenNavigationLink<
     Destination: View,
     Label: View,
@@ -50,7 +50,7 @@ struct HiddenNavigationLink<
     }
 }
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, macOS 10.15, *)
 extension HiddenNavigationLink where CustomButton == SwiftUI.Button<Label> {
     init(
         destination: Destination,

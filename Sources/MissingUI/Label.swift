@@ -16,6 +16,7 @@ public var defaultLabelFontSize: CGFloat = 18
 /**
 A `Text` that has a default font already set, so that you don't have to remember to set the `font` modifier.
 */
+@available(macOS 10.15, *)
 @inlinable
 public func Label<S: StringProtocol>(
     _ string: S,
@@ -29,6 +30,7 @@ public func Label<S: StringProtocol>(
 /**
 A `Text` that has a default font already set, so that you don't have to remember to set the `font` modifier.
 */
+@available(macOS 10.15, *)
 @inlinable
 public func Label(
     _ key: LocalizedStringKey,
@@ -49,6 +51,7 @@ public func Label(
 /**
 A `Text` that has a default font already set, so that you don't have to remember to set the `font` modifier.
 */
+@available(macOS 10.15, *)
 @inlinable
 public func Label(
     verbatim content: String,

@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+#if canImport(UIKit)
 /**
  This `ObservableObject` checks if the keyboard is currently open, and updates the `currentKeyboardHeight` whenever the keyboard frame changes, or the keyboars will be shown or hidden.
 
@@ -57,3 +58,5 @@ public final class KeyboardObserver: ObservableObject {
             .assign(to: \.currentKeyboardHeight, on: self)
     }
 }
+
+#endif
