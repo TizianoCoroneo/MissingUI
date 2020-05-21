@@ -17,24 +17,31 @@ import SwiftUI
 public struct BlurEffectView: UIViewRepresentable {
 
     private let blurEffectStyle: UIBlurEffect.Style
+    private let backgroundColor: UIColor
 
     public init(
-        blurEffectStyle: UIBlurEffect.Style
+        blurEffectStyle: UIBlurEffect.Style,
+        backgroundColor: UIColor = .clear
     ) {
         self.blurEffectStyle = blurEffectStyle
+        self.backgroundColor = backgroundColor
     }
 
     public func makeUIView(
         context: UIViewRepresentableContext<BlurEffectView>
     ) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: blurEffectStyle)
-        return UIVisualEffectView(effect: blurEffect)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.backgroundColor = self.backgroundColor
+        return view
     }
 
     public func updateUIView(
-        _ uiView: UIVisualEffectView,
+        _ view: UIVisualEffectView,
         context: UIViewRepresentableContext<BlurEffectView>
-    ) {}
+    ) {
+        view.backgroundColor = self.backgroundColor
+    }
 }
 
 #elseif canImport(Cocoa)
