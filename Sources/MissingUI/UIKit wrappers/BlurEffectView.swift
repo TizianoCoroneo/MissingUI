@@ -50,13 +50,13 @@ public struct BlurEffectView: UIViewRepresentable {
 public struct BlurEffectView: NSViewRepresentable {
     public typealias NSViewType = NSVisualEffectView
 
-    var material: NSVisualEffectView.Material
-    var blendingMode: NSVisualEffectView.BlendingMode
-    var state: NSVisualEffectView.State
-    var maskImage: NSImage?
-    var isEmphasized: Bool
+    let material: NSVisualEffectView.Material
+    let blendingMode: NSVisualEffectView.BlendingMode
+    let state: NSVisualEffectView.State
+    let maskImage: NSImage?
+    let isEmphasized: Bool
 
-    init(
+    public init(
         material: NSVisualEffectView.Material = .appearanceBased,
         blendingMode: NSVisualEffectView.BlendingMode = .behindWindow,
         state: NSVisualEffectView.State = .active,
