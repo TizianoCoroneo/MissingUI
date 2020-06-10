@@ -43,6 +43,44 @@ where Options.Element == Value
             minimumSelectionCount: Int = 0,
             maximumSelectionCount: Int = .max,
             allCasesValue: Value? = nil)
+
+        public var mandatorySingleSelection: Void? {
+            guard case .mandatorySingleSelection = self else { return nil }
+            return ()
+        }
+
+        public var mandatorySingleSelectionWithDefaultValue: Value? {
+            get {
+                guard case let .mandatorySingleSelectionWithDefaultValue(value) = self else { return nil }
+                return value
+            }
+            set {
+                guard case .mandatorySingleSelectionWithDefaultValue = self, let newValue = newValue else { return }
+                self = .mandatorySingleSelectionWithDefaultValue(defaultValue: newValue)
+            }
+        }
+
+        public var optionalSingleSelection: Void? {
+            guard case .optionalSingleSelection = self else { return nil }
+            return ()
+        }
+
+        public var multipleSelection: (
+            minimumSelectionCount: Int , 
+            maximumSelectionCount: Int , 
+            allCasesValue: Value? )? {
+            get {
+                guard case let .multipleSelection(value) = self else { return nil }
+                return value
+            }
+            set {
+                guard case .multipleSelection = self, let newValue = newValue else { return }
+                self = .multipleSelection(
+            minimumSelectionCount: newValue.0, 
+            maximumSelectionCount: newValue.1, 
+            allCasesValue: newValue.2)
+            }
+        }
     }
 
     // MARK: - Properties

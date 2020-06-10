@@ -43,4 +43,37 @@ enum ImageLoaderError: LocalizedError {
             """
         }
     }
+
+    var invalidHTTPCode: (Int, Data)? {
+        get {
+            guard case let .invalidHTTPCode(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .invalidHTTPCode = self, let newValue = newValue else { return }
+            self = .invalidHTTPCode(newValue.0, newValue.1)
+        }
+    }
+
+    var notHTTPResponse: (URLResponse, Data)? {
+        get {
+            guard case let .notHTTPResponse(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .notHTTPResponse = self, let newValue = newValue else { return }
+            self = .notHTTPResponse(newValue.0, newValue.1)
+        }
+    }
+
+    var notAnImage: (URLResponse, Data)? {
+        get {
+            guard case let .notAnImage(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .notAnImage = self, let newValue = newValue else { return }
+            self = .notAnImage(newValue.0, newValue.1)
+        }
+    }
 }

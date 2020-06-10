@@ -66,6 +66,11 @@ public enum Loading<Success, Failure: Error> {
             self = .failure(newValue)
         }
     }
+
+    public var loading: Void? {
+        guard case .loading = self else { return nil }
+        return ()
+    }
 }
 
 // MARK: - Computed properties
