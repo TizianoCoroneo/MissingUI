@@ -21,6 +21,10 @@ import Foundation
  typealias MyUserDefault<T> = UserDefault<T, MyKey>
  ```
  */
+@available(iOS, deprecated: 14, message: "Use AppStorage or SceneStorage instead")
+@available(macOS, deprecated: 11, message: "Use AppStorage or SceneStorage instead")
+@available(tvOS, deprecated: 14, message: "Use AppStorage or SceneStorage instead")
+@available(watchOS, deprecated: 7, message: "Use AppStorage or SceneStorage instead")
 @propertyWrapper
 public struct UserDefault<T, Key: RawRepresentable>
 where Key.RawValue == String {
